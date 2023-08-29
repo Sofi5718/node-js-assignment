@@ -1,0 +1,247 @@
+:root {
+    --yellow: rgb(209, 218, 31);
+    --red:  rgb(248, 5, 5);
+    --light-green: rgb(94, 210, 114);
+    --light-grey: #f1f1f4;
+    --text-color-light: #f1f1f1;
+    --text-color-dark: #333;
+    --white: #f2f2f2;
+    --font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+body {
+    font-family: var(--font-family);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #CC0000;
+    padding: 1em 0 1em 0;
+    Color: #FCCF00;
+}
+
+h1 {
+    text-align: center;
+    margin: 0;
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+footer {
+    text-align: center;
+    margin: 0;
+    background-color: #048d16;
+    padding: 1em 0 1em 0;
+}
+
+/* Grid styling on main */
+.grid-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1em;
+    padding: 1em;
+}
+
+.grid-item {
+    background-image: linear-gradient(#FF0000, #B3A125);
+    padding: 1em;
+    border-radius: 20px;
+}
+
+.grid-item:hover {
+    box-shadow: 0 8px 16px 0 black;
+}
+
+.grid-item img {
+    width: 100%;
+    height: 400px;
+    background-color: rgb(240, 232, 153);
+}
+
+.grid-item p {
+    padding-left: 0.5em;
+}
+
+.grid-item h2 {
+    padding-left: 0.3em
+}
+
+/* Dialog styling */
+dialog {
+    width: 65vw;
+    background-color:#FFDE00;
+    border-style: solid;
+    border-color: dodgerblue;
+    border-width: 15px;
+}
+
+.dialog-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+dialog h4 {
+    margin-bottom: 0;
+    
+}
+
+
+
+/* -grid container fra small til full ---------- */
+
+@media (min-width: 600px) {
+    .grid-container {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (min-width: 992px) {
+    .grid-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
+@media (min-width: 1200px) {
+    .grid-container {
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+}
+@media (min-width: 1500px) {
+    .grid-container {
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    }
+}
+
+.grid-container > article {
+    box-shadow: 1px 1px 8px rgba(0, 0, 0, 0.25);
+    padding: 1.5em;
+    background-color: var(--white);
+    transition: 0.5s;
+    animation: fadeIn 0.5s;
+    cursor: pointer;
+}
+
+
+/* .grid-container img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+} */
+
+.grid-container p {
+    margin: 0.3em 0;
+}
+
+
+/* ------- button close styling ------ */
+/* input form stryling */
+form {
+    margin: 2em auto 0;
+ /*    background-color: rgb(238, 238, 220); */
+    padding: 1em 1em 2em;
+    text-align: center;
+}
+
+button {
+    font-weight: 300;
+    font-size: 1em;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    color: var(--text-color-light);
+    background-color: var(--yellow);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.5em 1em;
+    width: 100%;
+    max-width: 380px;
+}
+
+dialog{
+    width: 60vw;
+    height: fit-content;
+}
+.dialog-grid{
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+#dialog-section{
+    padding: 1em;
+}
+
+/* stats display*/
+
+.dialog-stats{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    gap: 0.2em;
+    padding-left: 1em;
+    
+}
+.stats-HP{
+    background-color: red;
+    text-align: center;
+    border-radius: 15px;
+}
+.stats-Attack{
+    background-color: orange;
+    text-align: center;
+    border-radius: 15px;
+}
+
+.stats-Defence {
+    background-color: green;
+    text-align: center;
+    border-radius: 15px;
+}
+.stats-SpecialAttack{
+    background-color: rgb(0, 110, 255);
+    text-align: center;
+    border-radius: 15px;
+}
+.stats-SpecialDefence{
+    background-color: violet;
+    text-align: center;
+    border-radius: 15px;
+}
+.stats-Speed{
+    background-color: rgb(248, 192, 255);
+    text-align: center;
+    border-radius: 15px;
+}
+
+form {
+    margin: 2em auto 0;
+    background-color: var(--light-green);
+    padding: 1em 1em 2em;
+    text-align: center;
+}
+
+button {
+    font-weight: 300;
+    font-size: 1em;
+    text-align: center;
+    cursor: pointer;
+    border: none;
+    border-radius: 0;
+    color: var(--text-color-light);
+    background-color: var(--green);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.5em 1em;
+    width: 100%;
+    max-width: 380px;
+}
+
+input {
+    margin: 1em auto;
+    width: 100%;
+    max-width: 350px;
+    padding: 1em;
+    border: 2px solid var(--green);
+    display: block;
+    background: var(--white);
+}

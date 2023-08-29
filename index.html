@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./frontend/style.css">
+    <title>Music artists</title>
+
+</head>
+<body>
+    <header>
+        <h1>Music artists</h1>
+    </header>
+    <main>
+        <section id="artists" class="grid-container">
+        </section>
+
+        <form id="form-create">
+            <h2>Create a new Artist</h2>
+            <input type="text" name="name" placeholder="Type your name" required>
+    <label> Birthdate
+            <input type="date" name="birthdate" placeholder="Type birthdate" required>
+        </label>
+    <label> Active Since
+            <input type="date" name="activeSince" placeholder="Type active since" required>
+        </label>
+            <input type="text" name="genres" placeholder="Type genres" required>
+            <input type="text" name="labels" placeholder="Type labels" required>
+            <input type="url" name="website" placeholder="insert website" required>
+            <input type="url" name="image" placeholder="insert image url" required>
+            <input type="text" name="description" placeholder="Type short description" required>
+            <button>Create Artist</button>
+        </form>
+
+        <form id="form-update">
+            <h2>Update Artist</h2>
+            <input type="text" name="name" placeholder="Type your name" required>
+            <input type="date" name="birthdate" placeholder="Type birthdate" required>
+            <input type="date" name="activeSince" placeholder="Type active since" required>
+            <input type="text" name="genres" placeholder="Type genres" required>
+            <input type="text" name="labels" placeholder="Type labels" required>
+            <input type="url" name="website" placeholder="insert website" required>
+            <input type="url" name="image" placeholder="insert image url" required>
+            <input type="text" name="description" placeholder="Type short description" required>
+
+            <button>Update Artist</button>
+        </form>
+        
+    </main>
+
+    <footer>
+    </footer>
+
+    <script src="./frontend/app.js" type="module"></script>
+</body>
+</html>

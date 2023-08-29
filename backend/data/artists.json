@@ -1,0 +1,32 @@
+[
+    {
+      "name": "Alicia Johnson",
+      "birthdate": "1990-03-15",
+      "activeSince": "2010",
+      "genres": ["Pop", "R&B"],
+      "labels": ["Universal Music", "RCA Records"],
+      "website": "http://www.aliciajohnsonmusic.com",
+      "image": "image-url-1.jpg",
+      "shortDescription": "Soulful pop singer with chart-topping hits."
+    },
+    {
+      "name": "The Electric Beats",
+      "birthdate": "1985-07-21",
+      "activeSince": "2008",
+      "genres": ["Electronic", "Indie"],
+      "labels": ["Synth Records", "Indie Wave"],
+      "website": "http://www.electricbeatsband.com",
+      "image": "image-url-2.jpg",
+      "shortDescription": "Electronic duo known for their energetic live shows."
+    },
+    {
+      "name": "Max Rodriguez",
+      "birthdate": "1995-11-02",
+      "activeSince": "2013",
+      "genres": ["Hip-hop", "Rap"],
+      "labels": ["Big City Records", "Hustle Hustle"],
+      "website": "http://www.maxrodriguezofficial.com",
+      "image": "image-url-20.jpg",
+      "shortDescription": "Versatile rapper and lyricist from the streets."
+    }
+  ]
