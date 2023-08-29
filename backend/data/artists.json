@@ -1,5 +1,6 @@
 [
     {
+        "id": 1,
       "name": "Alicia Johnson",
       "birthdate": "1990-03-15",
       "activeSince": "2010",
@@ -10,6 +11,7 @@
       "shortDescription": "Soulful pop singer with chart-topping hits."
     },
     {
+        "id": 2,
       "name": "The Electric Beats",
       "birthdate": "1985-07-21",
       "activeSince": "2008",
@@ -20,6 +22,7 @@
       "shortDescription": "Electronic duo known for their energetic live shows."
     },
     {
+        "id": 3,
       "name": "Max Rodriguez",
       "birthdate": "1995-11-02",
       "activeSince": "2013",
