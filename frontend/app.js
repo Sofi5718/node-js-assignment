@@ -9,11 +9,15 @@ async function initApp() {
     console.log(artists);
     displayArtists(artists);
 
+    document.querySelector("#sort-by").addEventListener("change", sortByChanged);
+	document.querySelector("#filter-by").addEventListener("change", filterByChanged);
 }
+
 
 async function getArtist() {
     const response = await fetch(`${endpoint}/artists.json`);
     const data = await response.json();
+    console.log(data)
     return data;
 }
 
@@ -59,4 +63,51 @@ async function createArtist(name, birthdate, activeSince, genres, labels, websit
         body: artistAsJson
     })
     return response;
+}
+
+// sorter//
+function sortArtists(sortBy) {
+    if (sortBy === "name") {
+        return artists.sort((artistA, artistB) => artistA.name.localeCompare(artistB.name));
+    }
+    if (sortBy === "birthdate") {
+        return artists.sort((artistA, artistB) => artistA.birthdate.localeCompare(artistB.birthdate));
+    }
+    if (sortBy === "activeSince") {
+        return artists.sort((artistA, artistB) => artistA.activeSince.localeCompare(artistB.activeSince));
+    }
+    if (sortBy === "") {
+        return artists;
+    }
+}
+
+function sortByChanged(event) {
+	const selectedValue = event.target.value;
+	displayArtists(sortArtists(selectedValue));
+}
+
+//filter//
+function filterArtists(filterBy) {
+	switch (filterBy) {
+		case "":
+			return artists;
+		case "Pop":
+			return artists.filter((artist) => artist.genres.includes(filterBy));
+		case "Hip-hop":
+			return artists.filter((artist) => artist.genres.includes(filterBy));
+		case "R&B":
+			return artists.filter((artist) => artist.genres.includes(filterBy));
+		case "Rap":
+			return artists.filter((artist) => artist.genres.includes(filterBy));
+		case "Electronic":
+			return artists.filter((artist) => artist.genres.includes(filterBy));
+		case "Indie":
+			return artists.filter((artist) => artist.genres.includes(filterBy));
+		
+    }
+}
+
+function filterByChanged(event) {
+	const selectedValue = event.target.value;
+	displayArtists(filterArtists(selectedValue));
 }
