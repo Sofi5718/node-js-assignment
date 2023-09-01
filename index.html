@@ -12,9 +12,9 @@
     <header>
         <h1>Music Artists Libary</h1>
         <section class="tools-grid">
-            <label for="create-new" id="create-new-label"
-            >Create new
-            </label>
+
+            <button id="create-artist"> Create new</button>
+
             <label for="sort-by" id="sort-by-label"
             >Sort by:
             <select id="sort-by">
@@ -44,7 +44,7 @@
         <main>
                 <section id="artists" class="grid-container">
                 </section>
-
+<dialog id="create-dialog">
         <form id="form-create">
             <h2>Create a new Artist</h2>
             <input type="text" name="name" placeholder="Type your name" required>
@@ -59,8 +59,9 @@
             <input type="url" name="website" placeholder="insert website" required>
             <input type="url" name="image" placeholder="insert image url" required>
             <input type="text" name="description" placeholder="Type short description" required>
-            <button>Create Artist</button>
+            <input type="submit" value="Create" id="Create-submit-button">
         </form>
+    </dialog>
 
         <form id="form-update">
             <h2>Update Artist</h2>

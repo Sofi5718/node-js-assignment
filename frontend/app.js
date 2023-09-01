@@ -1,21 +1,24 @@
-const endpoint = "./backend/data";
+import { endpoint, createArtist } from "./http.js"
 
 window.addEventListener("load", initApp)
 
 let artists;
 
-async function initApp() {
-    artists = await getArtist();
-    console.log(artists);
-    displayArtists(artists);
+function initApp() {
+    updateArtistLibary();
 
     document.querySelector("#sort-by").addEventListener("change", sortByChanged);
-	document.querySelector("#filter-by").addEventListener("change", filterByChanged);
+    document.querySelector("#filter-by").addEventListener("change", filterByChanged);
+    document.querySelector("#create-artist").addEventListener("click", showCreateDialog);
 }
 
+function showCreateDialog() {
+    document.querySelector("#create-dialog").showModal()
+    document.querySelector("#form-create").addEventListener("submit", createArtistClicked);
+}
 
 async function getArtist() {
-    const response = await fetch(`${endpoint}/artists.json`);
+    const response = await fetch(`${endpoint}/artists`);
     const data = await response.json();
     console.log(data)
     return data;
@@ -44,25 +47,6 @@ function displayArtist(artist) {
     </article>
     `)
     
-}
-
-async function createArtist(name, birthdate, activeSince, genres, labels, website, image, shortDescription) {
-    const newArtist = {
-        name: name,
-        birthdate: birthdate,
-        activeSince: activeSince,
-        genres: genres,
-        labels: labels,
-        website: website,
-        image: image,
-        shortDescription: shortDescription
-    };
-    const artistAsJson = JSON.stringify(newArtist);
-    const response = await fetch(`${endpoint}/artists.json`, {
-        method: "POST",
-        body: artistAsJson
-    })
-    return response;
 }
 
 // sorter//
@@ -110,4 +94,29 @@ function filterArtists(filterBy) {
 function filterByChanged(event) {
 	const selectedValue = event.target.value;
 	displayArtists(filterArtists(selectedValue));
+}
+
+async function createArtistClicked(event) {
+    event.preventDefault()
+    const form = event.target
+    const name = form.name.value
+    const birthdate = form.birthdate.value
+    const activeSince = form.activeSince.value
+    const genres = form.genres.value
+    const labels = form.labels.value
+    const website = form.website.value
+    const description = form.description.value
+    const image = form.image.value
+    const response = await createArtist(name, birthdate, activeSince, genres, labels, website, image, description)
+    if (response.ok) {
+        form.reset();
+        updateArtistLibary();
+
+    }
+}
+
+async function updateArtistLibary() {
+    artists = await getArtist();
+    displayArtists(artists);
+    
 }
