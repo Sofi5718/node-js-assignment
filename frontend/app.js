@@ -1,4 +1,4 @@
-import { endpoint, createArtist } from "./http.js"
+import { endpoint, createArtist, deleteArtist } from "./http.js"
 
 window.addEventListener("load", initApp)
 
@@ -10,6 +10,7 @@ function initApp() {
     document.querySelector("#sort-by").addEventListener("change", sortByChanged);
     document.querySelector("#filter-by").addEventListener("change", filterByChanged);
     document.querySelector("#create-artist").addEventListener("click", showCreateDialog);
+    
 }
 
 function showCreateDialog() {
@@ -43,9 +44,13 @@ function displayArtist(artist) {
     <p>Labels: ${artist.labels}</p>    
     <P>Website: ${artist.website}</P>
     <p>Description: ${artist.shortDescription}</p>
-
+            <section class="btns">
+        <button class="delete-btn">Delete</button>
+        <button class="update-btn">Update</button>
+            </section>
     </article>
-    `)
+    `);
+    document.querySelector("#artists article:last-child .delete-btn").addEventListener("click", () => deleteArtistClicked(artist.id));
     
 }
 
@@ -119,4 +124,11 @@ async function updateArtistLibary() {
     artists = await getArtist();
     displayArtists(artists);
     
+}
+
+async function deleteArtistClicked(id) {
+    const response = await deleteArtist(id);
+    if (response.ok) {
+        updateArtistLibary();
+    }
 }

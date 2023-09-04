@@ -22,4 +22,14 @@ async function createArtist(name, birthdate, activeSince, genres, labels, websit
     return response;
 }
 
-export {endpoint, createArtist}
+//delete from grid// 
+async function deleteArtist(id) {
+    const response = await fetch(`${endpoint}/artists/${id}`, {
+        method: "DELETE"
+    });
+    if (response.ok) {
+        updateArtistLibary();
+    }
+}
+
+export {endpoint, createArtist, deleteArtist}
