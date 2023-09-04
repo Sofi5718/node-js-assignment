@@ -36,7 +36,7 @@ function displayArtists(listOfArtists) {
 function displayArtist(artist) {
     document.querySelector("#artists").insertAdjacentHTML("beforeend",/* html */`
     <article class = "grid-item">
-    <img src="" />
+    <img src="${artist.image}" />
     <h2>${artist.name}</h2>
     <p>Birthdate: ${artist.birthdate}</p>
     <p>Active Since: ${artist.activeSince}</p>
