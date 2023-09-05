@@ -40,3 +40,23 @@ app.delete("/artists/:id", async (request, response) => {
     fs.writeFile("./backend/data/artists.json", JSON.stringify(newArtists));
     response.json(artists);
 })
+
+app.put("/artists/:id", async (request, response) => {
+    const id = Number(request.params.id);
+    const data = await fs.readFile("./backend/data/artists.json");
+    const artists = JSON.parse(data);
+    let artistToUpdate = artists.find(artist => artist.id === id);
+    const body = request.body
+    artistToUpdate.name = body.name
+    artistToUpdate.birthdate = body.birthdate
+    artistToUpdate.activeSince = body.activeSince
+    artistToUpdate.genres = body.genres
+    artistToUpdate.labels = body.labels
+    artistToUpdate.website = body.website
+    artistToUpdate.image = body.image
+    artistToUpdate.description = body.description
+
+    fs.writeFile("./backend/data/artists.json", JSON.stringify(artists));
+    response.json(artists);
+    
+})

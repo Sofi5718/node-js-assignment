@@ -1,8 +1,9 @@
-import { endpoint, createArtist, deleteArtist } from "./http.js"
+import { endpoint, createArtist, deleteArtist, updateArtist } from "./http.js"
 
 window.addEventListener("load", initApp)
 
 let artists;
+let selectedArtist;
 
 function initApp() {
     updateArtistLibary();
@@ -10,6 +11,7 @@ function initApp() {
     document.querySelector("#sort-by").addEventListener("change", sortByChanged);
     document.querySelector("#filter-by").addEventListener("change", filterByChanged);
     document.querySelector("#create-artist").addEventListener("click", showCreateDialog);
+    document.querySelector("#form-update").addEventListener("submit", updateArtistClicked);
     
 }
 
@@ -43,7 +45,7 @@ function displayArtist(artist) {
     <p>Genres: ${artist.genres}</p>
     <p>Labels: ${artist.labels}</p>    
     <P>Website: ${artist.website}</P>
-    <p>Description: ${artist.shortDescription}</p>
+    <p>Description: ${artist.description}</p>
             <section class="btns">
         <button class="delete-btn">Delete</button>
         <button class="update-btn">Update</button>
@@ -51,7 +53,7 @@ function displayArtist(artist) {
     </article>
     `);
     document.querySelector("#artists article:last-child .delete-btn").addEventListener("click", () => deleteArtistClicked(artist.id));
-    
+    document.querySelector("#artists article:last-child .update-btn").addEventListener("click", () => selectArtist(artist));
 }
 
 // sorter//
@@ -130,5 +132,41 @@ async function deleteArtistClicked(id) {
     const response = await deleteArtist(id);
     if (response.ok) {
         updateArtistLibary();
+    }
+}
+
+function selectArtist(artist) {
+    selectedArtist = artist;
+    const form = document.querySelector("#form-update")
+    form.name.value = artist.name;
+    form.birthdate.value = artist.birthdate;
+    form.activeSince.value = artist.activeSince;
+    form.genres.value = artist.genres;
+    form.labels.value = artist.labels;
+    form.website.value = artist.website;
+    form.description.value = artist.description;
+    form.image.value = artist.image;
+
+    form.scrollIntoView({ behavior: "smooth" });
+    
+    
+}
+
+async function updateArtistClicked(event) {
+    event.preventDefault()
+    const form = event.target
+    const name = form.name.value
+    const birthdate = form.birthdate.value
+    const activeSince = form.activeSince.value
+    const genres = form.genres.value
+    const labels = form.labels.value
+    const website = form.website.value
+    const image = form.image.value
+    const description = form.description.value
+    const response = await updateArtist(selectedArtist.id, name, birthdate, activeSince, genres, labels, website, image, description)
+    if (response.ok) {
+        form.reset();
+        updateArtistLibary();
+
     }
 }
