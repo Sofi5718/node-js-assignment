@@ -1,30 +1,25 @@
-import { endpoint, createArtist, deleteArtist, updateArtist } from "./http.js";
+import { endpoint, createArtist, deleteArtist, updateArtist, getFavs, addToFavs, removeFaves } from "./http.js";
 
 window.addEventListener("load", initApp);
 
 let artists;
 let selectedArtist;
+let favID;
 
 function initApp() {
   updateArtistLibary();
 
   document.querySelector("#sort-by").addEventListener("change", sortByChanged);
-  document
-    .querySelector("#filter-by")
-    .addEventListener("change", filterByChanged);
-  document
-    .querySelector("#create-artist")
-    .addEventListener("click", showCreateDialog);
-  document
-    .querySelector("#form-update")
-    .addEventListener("submit", updateArtistClicked);
+  document.querySelector("#filter-by").addEventListener("change", filterByChanged);
+  document.querySelector("#create-artist").addEventListener("click", showCreateDialog);
+  document.querySelector("#form-update").addEventListener("submit", updateArtistClicked);
+
+  document.querySelector("#faves").addEventListener("change", favsClicked);
 }
 
 function showCreateDialog() {
   document.querySelector("#create-dialog").showModal();
-  document
-    .querySelector("#form-create")
-    .addEventListener("submit", createArtistClicked);
+  document.querySelector("#form-create").addEventListener("submit", createArtistClicked);
 }
 
 async function getArtist() {
@@ -60,34 +55,28 @@ function displayArtist(artist) {
         <button class="delete-btn">Delete</button>
         <button class="update-btn">Update</button>
         <button class="favorite-btn">Add to fav</button>
+        <button class="remove-btn">Remove from fav</button>
             </section>
     </article>
     `
   );
-  document
-    .querySelector("#artists article:last-child .delete-btn")
-    .addEventListener("click", () => deleteArtistClicked(artist.id));
-  document
-    .querySelector("#artists article:last-child .update-btn")
-    .addEventListener("click", () => selectArtist(artist));
+  document.querySelector("#artists article:last-child .delete-btn").addEventListener("click", () => deleteArtistClicked(artist.id));
+  document.querySelector("#artists article:last-child .update-btn").addEventListener("click", () => selectArtist(artist));
+
+  document.querySelector("#artists article:last-child .favorite-btn").addEventListener("click", () => addToFavs(artist.id));
+  document.querySelector("#artists article:last-child .remove-btn").addEventListener("click", () => removeFaves(artist.id));
 }
 
 // sorter//
 function sortArtists(sortBy) {
   if (sortBy === "name") {
-    return artists.sort((artistA, artistB) =>
-      artistA.name.localeCompare(artistB.name)
-    );
+    return artists.sort((artistA, artistB) => artistA.name.localeCompare(artistB.name));
   }
   if (sortBy === "birthdate") {
-    return artists.sort((artistA, artistB) =>
-      artistA.birthdate.localeCompare(artistB.birthdate)
-    );
+    return artists.sort((artistA, artistB) => artistA.birthdate.localeCompare(artistB.birthdate));
   }
   if (sortBy === "activeSince") {
-    return artists.sort((artistA, artistB) =>
-      artistA.activeSince.localeCompare(artistB.activeSince)
-    );
+    return artists.sort((artistA, artistB) => artistA.activeSince.localeCompare(artistB.activeSince));
   }
   if (sortBy === "") {
     return artists;
@@ -135,16 +124,7 @@ async function createArtistClicked(event) {
   const website = form.website.value;
   const description = form.description.value;
   const image = form.image.value;
-  const response = await createArtist(
-    name,
-    birthdate,
-    activeSince,
-    genres,
-    labels,
-    website,
-    image,
-    description
-  );
+  const response = await createArtist(name, birthdate, activeSince, genres, labels, website, image, description);
   if (response.ok) {
     form.reset();
     updateArtistLibary();
@@ -153,6 +133,7 @@ async function createArtistClicked(event) {
 
 async function updateArtistLibary() {
   artists = await getArtist();
+  favID = await getFavs();
   displayArtists(artists);
 }
 
@@ -189,20 +170,19 @@ async function updateArtistClicked(event) {
   const website = form.website.value;
   const image = form.image.value;
   const description = form.description.value;
-  const response = await updateArtist(
-    selectedArtist.id,
-    name,
-    birthdate,
-    activeSince,
-    genres,
-    labels,
-    website,
-    image,
-    description
-  );
+  const response = await updateArtist(selectedArtist.id, name, birthdate, activeSince, genres, labels, website, image, description);
   if (response.ok) {
     form.reset();
     updateArtistLibary();
   }
-    console.log(responseTime);
+}
+
+function favsClicked(event) {
+  const checked = event.target.checked;
+  console.log(checked);
+  if (checked) {
+    displayArtists(favID);
+  } else {
+    updateArtistLibary();
+  }
 }
