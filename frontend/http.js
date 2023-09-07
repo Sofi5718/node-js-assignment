@@ -27,9 +27,7 @@ async function deleteArtist(id) {
     const response = await fetch(`${endpoint}/artists/${id}`, {
         method: "DELETE"
     });
-    if (response.ok) {
-        updateArtistLibary();
-    }
+    return response;
 }
 
 //update artist from grid//
