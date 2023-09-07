@@ -46,7 +46,35 @@ async function updateArtist(id, name, birthdate, activeSince, genres, labels, we
     return response;
 }
 
+async function getFavs() {
+    const response = await fetch(`${endpoint}/fav`);
+    const data = await response.json();
+    return data;
+}
+
+async function addToFavs(id) {
+    const newFav = {
+        id: id
+    }
+    const newFavAsJson = JSON.stringify(newFav);
+    const response = await fetch(`${endpoint}/fav`, {
+        method: "POST",
+        body: newFavAsJson,
+        headers: {
+            "Content-Type": "application/json"
+        }
+    })
+    return response;
+}
+
+async function removeFaves(id) {
+    const response = await fetch(`${endpoint}/fav/${id}`, {
+        method: "DELETE"
+    })
+    return response;
+}
 
 
-export { endpoint, createArtist, deleteArtist, updateArtist }
+
+export { endpoint, createArtist, deleteArtist, updateArtist, getFavs, addToFavs, removeFaves}
 
